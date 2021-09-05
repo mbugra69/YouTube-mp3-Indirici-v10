@@ -28,9 +28,11 @@ namespace YouTube_mp3_Indirici_v10
 
         //True ise -> MP3 false ise ->MP4 indir.
 
+     
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+  
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -99,8 +101,11 @@ namespace YouTube_mp3_Indirici_v10
         void GetVideoTitle()
         {
 
-
-
+            if(textBox1.Text =="")
+            {
+                MessageBox.Show("Video Linki Boş Bırakılamaz", "Uyarı");
+            }
+            else { 
             WebRequest istek = HttpWebRequest.Create(textBox1.Text);
             WebResponse yanit;
             yanit = istek.GetResponse();
@@ -110,6 +115,8 @@ namespace YouTube_mp3_Indirici_v10
             int bitis = gelen.Substring(baslangic).IndexOf("</title>");
             string gelenBilgiler = gelen.Substring(baslangic, bitis);
             labelVideoName.Text = (gelenBilgiler);
+            }
+
 
 
         }
@@ -136,8 +143,39 @@ namespace YouTube_mp3_Indirici_v10
 
         private void buttonYapistir_Click(object sender, EventArgs e)
         {
-            labelVideoAd.Visible = true;
+          
             GetVideoTitle();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void hakkındaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Bu Uygulama MbK tarafından tasarlanmıştır.", "Hakkında");
+        }
+
+        private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult secenek = MessageBox.Show("Uygulamadan çıkmak istiyor musunuz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (secenek == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            else if (secenek == DialogResult.No)
+            {
+                
+            }
+
+           
         }
     }
 }
